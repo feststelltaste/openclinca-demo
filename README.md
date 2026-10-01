@@ -88,7 +88,7 @@ state:
 1. Develop and test the changes.
 2. Tag the state, for example `git tag demo-v2 && git push origin demo-v2`.
 3. The GitHub Actions workflow `Demo-Image` builds the WAR and publishes
-   `ghcr.io/feststelltaste/openclinca-demo:demo-v2`. Wait until it is green.
+   `ghcr.io/feststelltaste/openclinica-demo:demo-v2`. Wait until it is green.
 4. Set the image tag in `docker-compose.demo.yml` to the new version and commit.
 
 The image contains only the application. The demo data is not part of it; it is

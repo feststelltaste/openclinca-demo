@@ -14,7 +14,7 @@ services:
       - openclinica-test-db:/var/lib/postgresql/data
 
   openclinica:
-    image: ghcr.io/feststelltaste/openclinca-demo:demo-v1
+    image: ghcr.io/feststelltaste/openclinica-demo:demo-v1
     depends_on:
       database:
         condition: service_healthy
