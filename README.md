@@ -37,7 +37,7 @@ COMPOSE_FILE=docker-compose.demo.yml bash docker/test/reset-demo-data.sh --yes
 The command pulls the image, starts PostgreSQL and OpenClinica, waits until the
 database schema exists and then loads the demo data. The first start can take a
 few minutes. Afterwards, open <http://127.0.0.1:8080/OpenClinica/MainMenu> and
-sign in with the initial test account `root` / `12345678`. The credentials are
+sign in with the initial test account `root` / `openclinica`. The credentials are
 for local testing only.
 
 The demo data consists of eight simple English studies with 20 synthetic

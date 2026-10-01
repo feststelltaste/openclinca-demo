@@ -4,11 +4,14 @@
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import json
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+
+DEMO_PASSWORD = "openclinica"
 
 STUDIES = (
     ("COFFEE", "Coffee and Morning Energy", "Does morning coffee make the day feel easier?", 20, "2024-01-01", "2026-12-31", "2024-02-05", 30),
@@ -319,6 +322,8 @@ def main() -> int:
                         insert("item_data", item_values)
 
     print("UPDATE user_account SET active_study = 1001 WHERE user_name = 'root';")
+    root_passwd = hashlib.sha1(DEMO_PASSWORD.encode()).hexdigest()
+    print(f"UPDATE user_account SET passwd = '{root_passwd}' WHERE user_name = 'root';")
     sync_sequences()
     print("COMMIT;")
     return 0

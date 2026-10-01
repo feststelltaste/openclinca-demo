@@ -6,4 +6,4 @@ if [[ -n "${CODESPACE_NAME:-}" ]]; then
 else
     echo "Open http://127.0.0.1:8080/OpenClinica/MainMenu"
 fi
-echo "Sign in with root / 12345678"
+echo "Sign in with root / openclinica"
