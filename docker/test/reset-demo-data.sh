@@ -36,4 +36,4 @@ python3 "$generator" |
 "${compose[@]}" start openclinica
 
 echo "Loaded 8 demo studies and 160 synthetic subjects."
-echo "Open http://127.0.0.1:8080/OpenClinica/MainMenu"
+bash "$repo_dir/docker/test/print-url.sh"
