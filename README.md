@@ -22,84 +22,87 @@ OpenClinica is an open source software for Electronic Data Capture (EDC) and Cli
 - [Extensions/Contributions](https://community.openclinica.com/extensions)
 - [Installation](https://github.com/OpenClinica/OpenClinica/wiki)
 
-## Local test installation
+## Demo installation on your own computer
 
-The repository contains a Docker Compose setup for a disposable local
-OpenClinica installation. It requires Maven, JDK 17 for the build, Docker, and
-Docker Compose.
+This is the quickest way to try OpenClinica locally. It uses a prebuilt image
+of a released demo version, so neither Maven nor a JDK is needed. Only Docker
+with Docker Compose is required.
 
-Build all modules and start the application from the repository root:
-
-```bash
-mvn -DskipTests package
-docker compose -f docker-compose.test.yml up -d
-```
-
-The first application start creates and migrates the database and can take a
-few minutes. Follow it with:
+Start OpenClinica and load the synthetic demo data from the repository root:
 
 ```bash
-docker compose -f docker-compose.test.yml logs -f openclinica
+COMPOSE_FILE=docker-compose.demo.yml bash docker/test/reset-demo-data.sh --yes
 ```
 
-Open <http://127.0.0.1:8080/OpenClinica/MainMenu> and sign in with the initial
-test account `root` / `12345678`. The Compose configuration and credentials are
-for local testing only. Forced password changes and password expiration are
-disabled in this local test installation.
+The command pulls the image, starts PostgreSQL and OpenClinica, waits until the
+database schema exists and then loads the demo data. The first start can take a
+few minutes. Afterwards, open <http://127.0.0.1:8080/OpenClinica/MainMenu> and
+sign in with the initial test account `root` / `12345678`. The credentials are
+for local testing only.
 
-Reset the local database and load deterministic demo data:
-
-```bash
-./docker/test/reset-demo-data.sh --yes
-```
-
-The command creates eight simple English demo studies with 20 synthetic
+The demo data consists of eight simple English studies with 20 synthetic
 subjects each (160 in total), complete visits, forms, and everyday habit data.
-Their enrollment targets produce different study progress values from 10% to
-100%. Planned study periods span 2024 to 2028, with follow-up visits ranging
-from 30 days to one year. It deletes the existing local Docker test database
-first. No real personal data is used.
+No real personal data is used. Running the command again deletes the database
+and recreates the data.
 
-Stop the containers while retaining test data:
+Stop the containers while retaining the data:
 
 ```bash
-docker compose -f docker-compose.test.yml down
+docker compose -f docker-compose.demo.yml down
 ```
 
-To remove the test database and uploaded files as well, add `--volumes`.
+Add `--volumes` to remove the database and uploaded files as well.
 
-### GitHub Codespaces
+## Local development build
 
-The repository includes a development-container configuration for Codespaces.
-Create a codespace with at least four CPU cores. Maven and Docker are installed
-automatically, but the application is not built during container creation. This
-keeps codespace rebuilds fast. Build and start OpenClinica when needed:
+To run your own code changes, build the application yourself. This requires
+Maven, JDK 17 for the build, Docker, and Docker Compose.
 
 ```bash
 mvn -DskipTests package
 docker compose -f docker-compose.test.yml up -d
 ```
 
-To load the synthetic demo data after the application has started, run:
+The first start creates and migrates the database and can take a few minutes.
+Follow it with `docker compose -f docker-compose.test.yml logs -f openclinica`.
+To reset the database and load the demo data, run
+`bash docker/test/reset-demo-data.sh --yes`. Without `COMPOSE_FILE`, the script
+uses `docker-compose.test.yml`.
 
-```bash
-./docker/test/reset-demo-data.sh --yes
-```
+## GitHub Codespaces
 
-Open the `PORTS` tab, select port `8080`, and open its forwarded address. Add
-`/OpenClinica/MainMenu` to that address. Forwarded ports are private by default;
-do not make this test installation public because it uses known credentials.
+The repository includes a development-container configuration. Create a
+codespace with at least four CPU cores. On creation, it starts the demo
+installation from the prebuilt image and loads the demo data. Open the `PORTS`
+tab, select port `8080`, open its forwarded address and add
+`/OpenClinica/MainMenu`. Forwarded ports are private by default; do not make
+this installation public because it uses known credentials.
 
-Codespace storage survives stopping and restarting a codespace, but deleting
-the codespace also deletes its local Docker volumes and uploaded CRFs.
+Deleting a codespace also deletes its Docker volumes and uploaded CRFs.
+
+### Notes for maintainers
+
+The demo image is not built on every push, but only for a deliberately released
+state:
+
+1. Develop and test the changes.
+2. Tag the state, for example `git tag demo-v2 && git push origin demo-v2`.
+3. The GitHub Actions workflow `Demo-Image` builds the WAR and publishes
+   `ghcr.io/feststelltaste/openclinca-demo:demo-v2`. Wait until it is green.
+4. Set the image tag in `docker-compose.demo.yml` to the new version and commit.
+
+The image contains only the application. The demo data is not part of it; it is
+loaded reproducibly by `docker/test/reset-demo-data.sh`. The package must be
+public so that codespaces and other computers can pull the image without
+logging in.
 
 ## Request a feature
 
 To request a feature please submit a ticket on [Jira](https://jira.openclinica.com/) or start a discussion on the [OpenClinica Forum](http://forums.openclinica.com).
 
-##Screenshots
+## Screenshots
 ![Imgur](http://i.imgur.com/ACXj3L7.jpg "Home screen") 
-##![Imgur](http://i.imgur.com/DqHQ05Z.jpg "Subject Matrix")
+![Imgur](http://i.imgur.com/DqHQ05Z.jpg "Subject Matrix")
 
 
 
