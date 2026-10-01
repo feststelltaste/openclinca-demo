@@ -71,10 +71,16 @@ To remove the test database and uploaded files as well, add `--volumes`.
 ### GitHub Codespaces
 
 The repository includes a development-container configuration for Codespaces.
-Create a codespace with at least four CPU cores. The initial Maven build runs
-automatically, and later codespace starts bring up Docker Compose again.
+Create a codespace with at least four CPU cores. Maven and Docker are installed
+automatically, but the application is not built during container creation. This
+keeps codespace rebuilds fast. Build and start OpenClinica when needed:
 
-To load the synthetic demo data once the initial build has finished, run:
+```bash
+mvn -DskipTests package
+docker compose -f docker-compose.test.yml up -d
+```
+
+To load the synthetic demo data after the application has started, run:
 
 ```bash
 ./docker/test/reset-demo-data.sh --yes
