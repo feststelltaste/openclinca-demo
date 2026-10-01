@@ -1,8 +1,10 @@
 {
   "name": "OpenClinica",
-  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "features": {
-    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    "ghcr.io/devcontainers/features/docker-in-docker:4": {}
   },
   "customizations": {
     "vscode": {
