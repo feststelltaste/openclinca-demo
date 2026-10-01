@@ -8,6 +8,9 @@
   },
   "customizations": {
     "vscode": {
+      "settings": {
+        "redhat.telemetry.enabled": false
+      },
       "extensions": [
         "vscjava.vscode-java-pack"
       ]
