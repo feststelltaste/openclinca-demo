@@ -27,3 +27,8 @@ ws/.DS_Store
 
 # netbeans
 nb-configuration.xml
+
+# Local diagnostics and generated Python files
+/temp/
+__pycache__/
+*.py[cod]
