@@ -114,46 +114,6 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter>
-        <filter-name>compressFilter</filter-name>
-        <filter-class>com.planetj.servlet.filter.compression.CompressingFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/InitialDataEntry</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/ViewSectionDataEntry</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/AdministrativeEditing</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/DoubleDataEntry</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/ListStudySubjects</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/SectionPreview</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/CreateCRFVersion</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/CreateXformCRFVersion</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>compressFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
