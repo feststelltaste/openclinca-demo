@@ -1,0 +1,22 @@
+{
+  "name": "OpenClinica",
+  "image": "mcr.microsoft.com/devcontainers/java:1-17-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": {
+      "label": "OpenClinica",
+      "protocol": "http",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "mvn -DskipTests package",
+  "postStartCommand": "docker compose -f docker-compose.test.yml up -d",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "32gb"
+  }
+}
